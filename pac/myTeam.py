@@ -53,7 +53,7 @@ def createTeam(firstIndex, secondIndex, isRed,
 # Agents #
 ##########
 
-class DefensiveAgent(CaptureAgent):
+class agentBase(CaptureAgent):
   """
   A Dummy agent to serve as an example of the necessary agent structure.
   You should look at baselineTeam.py for more details about how to
@@ -139,4 +139,10 @@ class DefensiveAgent(CaptureAgent):
                   frontier.push((successor, path+[action], newCost), heuristicCost)
       
       return []
+
+class defensiveAgent(agentBase):
+  def chooseAction(self, gameState: GameState) -> Action:
+    # placeholder for defensive implementation of choosing an action
+    actions = gameState.getLegalActions(self.index)
+    
 
