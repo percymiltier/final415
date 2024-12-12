@@ -23,6 +23,12 @@ from game import Directions
 # Team creation #
 #################
 
+# Team 2 Members:
+# Percy Miltier
+#
+#
+#
+
 def createTeam(firstIndex, secondIndex, isRed,
                first = 'DummyAgent', second = 'DummyAgent'):
   """
