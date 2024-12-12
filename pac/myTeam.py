@@ -30,7 +30,7 @@ from game import Directions
 #
 
 def createTeam(firstIndex, secondIndex, isRed,
-               first = 'CaptureAgent', second = 'HomeAgent'):
+               first = 'offensiveAgent', second = 'defensiveAgent'):
   """
   This function should return a list of two agents that will form the
   team, initialized using firstIndex and secondIndex as their agent
@@ -140,13 +140,28 @@ class agentBase(CaptureAgent):
       
       return []
 
+class offensiveAgent(agentBase):
+  def chooseAction(self, gameState: GameState) -> Action:
+    # placeholder for defensive implementation of choosing an action
+    actions = gameState.getLegalActions(self.index)
+    return random.choice(actions)
+
 class defensiveAgent(agentBase):
+<<<<<<< HEAD
     def chooseAction(self, gameState: GameState) -> Action:
         """
         Implements a defensive strategy to protect the home territory.
         Prioritizes stopping invaders and patrolling the territory to guard food.
         """
         actions = gameState.getLegalActions(self.index)
+=======
+  def chooseAction(self, gameState: GameState) -> Action:
+    # placeholder for defensive implementation of choosing an action
+    actions = gameState.getLegalActions(self.index)
+    return random.choice(actions)
+  
+
+>>>>>>> ca73eb0cc430963b8db6ba0218d375238ddf9175
 
         # Get current position of the agent
         myPos = gameState.getAgentPosition(self.index)
