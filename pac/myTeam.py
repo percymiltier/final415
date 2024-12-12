@@ -140,13 +140,13 @@ class agentBase(CaptureAgent):
       
       return []
 
-class defensiveAgent(agentBase):
+class CaptureAgent(agentBase):
   def chooseAction(self, gameState: GameState) -> Action:
     # placeholder for defensive implementation of choosing an action
     actions = gameState.getLegalActions(self.index)
     return random.choice(actions)
 
-class offensiveAgent(agentBase):
+class HomeAgent(agentBase):
   def chooseAction(self, gameState: GameState) -> Action:
     # placeholder for defensive implementation of choosing an action
     actions = gameState.getLegalActions(self.index)
