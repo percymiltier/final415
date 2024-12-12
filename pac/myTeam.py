@@ -30,7 +30,7 @@ from game import Directions
 #
 
 def createTeam(firstIndex, secondIndex, isRed,
-               first = 'OffensiveAgent', second = 'DefensiveAgent'):
+               first = 'CaptureAgent', second = 'HomeAgent'):
   """
   This function should return a list of two agents that will form the
   team, initialized using firstIndex and secondIndex as their agent
@@ -53,7 +53,7 @@ def createTeam(firstIndex, secondIndex, isRed,
 # Agents #
 ##########
 
-class DummyAgent(CaptureAgent):
+class DefensiveAgent(CaptureAgent):
   """
   A Dummy agent to serve as an example of the necessary agent structure.
   You should look at baselineTeam.py for more details about how to
