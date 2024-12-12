@@ -147,45 +147,33 @@ class offensiveAgent(agentBase):
     return random.choice(actions)
 
 class defensiveAgent(agentBase):
-<<<<<<< HEAD
-    def chooseAction(self, gameState: GameState) -> Action:
-        """
-        Implements a defensive strategy to protect the home territory.
-        Prioritizes stopping invaders and patrolling the territory to guard food.
-        """
-        actions = gameState.getLegalActions(self.index)
-=======
   def chooseAction(self, gameState: GameState) -> Action:
     # placeholder for defensive implementation of choosing an action
     actions = gameState.getLegalActions(self.index)
     return random.choice(actions)
-  
+    # Get current position of the agent
+    myPos = gameState.getAgentPosition(self.index)
 
->>>>>>> ca73eb0cc430963b8db6ba0218d375238ddf9175
+    # Get opponent positions
+    enemies = [gameState.getAgentState(i) for i in self.getOpponents(gameState)]
+    invaders = [enemy for enemy in enemies if enemy.isPacman and enemy.getPosition() is not None]
 
-        # Get current position of the agent
-        myPos = gameState.getAgentPosition(self.index)
+    # If there are invaders, target the closest one
+    if invaders:
+        invader_positions = [invader.getPosition() for invader in invaders]
+        closest_invader = min(invader_positions, key=lambda pos: self.getMazeDistance(myPos, pos))
+        return self.moveToTarget(gameState, closest_invader)
 
-        # Get opponent positions
-        enemies = [gameState.getAgentState(i) for i in self.getOpponents(gameState)]
-        invaders = [enemy for enemy in enemies if enemy.isPacman and enemy.getPosition() is not None]
+    # If no invaders, patrol the defensive zone
+    else:
+        foodDefending = self.getFoodYouAreDefending(gameState).asList()
+        if foodDefending:
+            # Patrol the closest food in the defensive zone
+            closest_food = min(foodDefending, key=lambda pos: self.getMazeDistance(myPos, pos))
+            return self.moveToTarget(gameState, closest_food)
 
-        # If there are invaders, target the closest one
-        if invaders:
-            invader_positions = [invader.getPosition() for invader in invaders]
-            closest_invader = min(invader_positions, key=lambda pos: self.getMazeDistance(myPos, pos))
-            return self.moveToTarget(gameState, closest_invader)
-
-        # If no invaders, patrol the defensive zone
-        else:
-            foodDefending = self.getFoodYouAreDefending(gameState).asList()
-            if foodDefending:
-                # Patrol the closest food in the defensive zone
-                closest_food = min(foodDefending, key=lambda pos: self.getMazeDistance(myPos, pos))
-                return self.moveToTarget(gameState, closest_food)
-
-        # Default: Choose a random action if no other goal
-        return random.choice(actions)
+    # Default: Choose a random action if no other goal
+    return random.choice(actions)
 
     def moveToTarget(self, gameState: GameState, target: tuple) -> Action:
         """
