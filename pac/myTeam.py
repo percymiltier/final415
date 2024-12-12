@@ -98,3 +98,43 @@ class DummyAgent(CaptureAgent):
 
     return random.choice(actions)
 
+    def nullHeuristic(state, problem=None):
+        """
+        A heuristic function estimates the cost from the current state to the nearest
+        goal in the provided SearchProblem.  This heuristic is trivial.
+        """
+        return 0
+
+
+    def aStarSearch(problem, heuristic=nullHeuristic):
+        """
+        Search the node that has the lowest combined cost and heuristic first.
+        """
+        "*** YOUR CODE HERE ***"
+        #print("Start:", problem.getStartState())
+        #print("Is the start a goal?", problem.isGoalState(problem.getStartState()))
+        #print("Start's successors:", problem.getSuccessors(problem.getStartState()))
+        
+        # Initialization: Frontier is a priority queue, add start state
+        frontier = util.PriorityQueue()
+        frontier.push((problem.getStartState(), [], 0), heuristic(problem.getStartState(), problem))
+        
+        visited = {}
+        
+        while not frontier.isEmpty():
+            state, path, currentCost = frontier.pop()
+            
+            if problem.isGoalState(state):
+                return path
+            
+            if state not in visited or currentCost < visited[state]:
+                visited[state] = currentCost
+                
+                for successor, action, stepCost in problem.getSuccessors(state):
+                    newCost = currentCost + stepCost
+                    heuristicCost = newCost + heuristic(successor, problem)
+                    
+                    frontier.push((successor, path+[action], newCost), heuristicCost)
+        
+        return []
+
