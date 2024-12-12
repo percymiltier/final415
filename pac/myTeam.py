@@ -144,5 +144,13 @@ class defensiveAgent(agentBase):
   def chooseAction(self, gameState: GameState) -> Action:
     # placeholder for defensive implementation of choosing an action
     actions = gameState.getLegalActions(self.index)
-    
+    return random.choice(actions)
+
+class offensiveAgent(agentBase):
+  def chooseAction(self, gameState: GameState) -> Action:
+    # placeholder for defensive implementation of choosing an action
+    actions = gameState.getLegalActions(self.index)
+    return random.choice(actions)
+  
+
 
