@@ -150,7 +150,7 @@ class defensiveAgent(agentBase):
   def chooseAction(self, gameState: GameState) -> Action:
     # placeholder for defensive implementation of choosing an action
     actions = gameState.getLegalActions(self.index)
-    return random.choice(actions)
+
     # Get current position of the agent
     myPos = gameState.getAgentPosition(self.index)
 
@@ -175,27 +175,27 @@ class defensiveAgent(agentBase):
     # Default: Choose a random action if no other goal
     return random.choice(actions)
 
-    def moveToTarget(self, gameState: GameState, target: tuple) -> Action:
-        """
-        Moves towards a specified target using a basic greedy approach.
-        """
-        actions = gameState.getLegalActions(self.index)
-        best_action = None
-        shortest_distance = float('inf')
+  def moveToTarget(self, gameState: GameState, target: tuple) -> Action:
+      """
+      Moves towards a specified target using a basic greedy approach.
+      """
+      actions = gameState.getLegalActions(self.index)
+      best_action = None
+      shortest_distance = float('inf')
 
-        for action in actions:
-            successor = self.getSuccessor(gameState, action)
-            newPos = successor.getAgentPosition(self.index)
-            distance = self.getMazeDistance(newPos, target)
+      for action in actions:
+          successor = self.getSuccessor(gameState, action)
+          newPos = successor.getAgentPosition(self.index)
+          distance = self.getMazeDistance(newPos, target)
 
-            if distance < shortest_distance:
-                shortest_distance = distance
-                best_action = action
+          if distance < shortest_distance:
+              shortest_distance = distance
+              best_action = action
 
-        return best_action
+      return best_action
 
-    def getSuccessor(self, gameState: GameState, action: Action) -> GameState:
-        """
-        Finds the next successor which is a grid position (location tuple).
-        """
-        return gameState.generateSuccessor(self.index, action)
+  def getSuccessor(self, gameState: GameState, action: Action) -> GameState:
+      """
+      Finds the next successor which is a grid position (location tuple).
+      """
+      return gameState.generateSuccessor(self.index, action)
